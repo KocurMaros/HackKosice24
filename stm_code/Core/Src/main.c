@@ -101,7 +101,18 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  buzzer_freq(12000);
+	  if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1)){
+		  buzzer_freq(1000);
+		}
+		else if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_4)){
+			buzzer_freq(10000);
+		}else if(!HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
+			buzzer_freq(440);
+		}else{
+			buzzer_freq(0);
+		}
+
+
 //	  HAL_Delay(100);
 //	  buzzer_stop();
 //	  HAL_Delay(100);
