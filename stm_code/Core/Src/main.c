@@ -95,24 +95,46 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  buzzer_stop();
+  uint8_t Test[] = "Hello World !!!\r\n"; //Data to send
+  uint8_t Rx_data[100] = {0};  //  creating a buffer of 10 bytes
+  uint8_t Tx_data[100] = {0};
+  	  bool start_read = false;
+//  buzzer_stop();
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1)){
-		  buzzer_freq(1000);
-		}
-		else if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_4)){
-			buzzer_freq(10000);
-		}else if(!HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
-			buzzer_freq(440);
-		}else{
-			buzzer_freq(0);
-		}
-
-
+//	  if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1)){
+//		  buzzer_freq(1000);
+//		}
+//		else if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_4)){
+//			buzzer_freq(10000);
+//		}else if(!HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
+//			buzzer_freq(440);
+//		}else{
+//			buzzer_freq(0);
+//		}
+//	  HAL_UART_Transmit(&huart2,Test,sizeof(Test),10);// Sending in normal mode
+	  HAL_UART_Receive (&huart2, Rx_data, 1000, 500);  // receive 4 bytes of data
+	  if(Rx_data[0] == '%'){
+		  start_read = true;
+		  Rx_data[0] = 0;
+	  }
+	  if(start_read){
+		  start_read = false;
+		  for(size_t i = 1; i <100;i++){
+			  if(Rx_data[i] == '$'){
+				  Tx_data[i-1] = '\0';
+				  //call function for parse notes and send ack to master
+				  HAL_UART_Transmit(&huart2,Tx_data,i+1,10);// Sending in normal mode
+			  }
+			  else{
+				  Tx_data[i-1] = Rx_data[i];
+			  }
+		  }
+	  }
+//	HAL_Delay(1000);
 //	  HAL_Delay(100);
 //	  buzzer_stop();
 //	  HAL_Delay(100);

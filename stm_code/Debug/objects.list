@@ -1,6 +1,7 @@
 "./Core/Src/buzzer.o"
 "./Core/Src/gpio.o"
 "./Core/Src/main.o"
+"./Core/Src/shift_register.o"
 "./Core/Src/stm32g0xx_hal_msp.o"
 "./Core/Src/stm32g0xx_it.o"
 "./Core/Src/syscalls.o"
