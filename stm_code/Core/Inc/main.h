@@ -32,6 +32,7 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "buzzer.h"
+#include "MC74HCT595A.h"
 #include <stdbool.h>
 /* USER CODE END Includes */
 
@@ -72,6 +73,10 @@ void Error_Handler(void);
 #define LED_GREEN_GPIO_Port GPIOA
 #define BUTTON_3_Pin GPIO_PIN_1
 #define BUTTON_3_GPIO_Port GPIOB
+#define P_LATCH_Pin GPIO_PIN_14
+#define P_LATCH_GPIO_Port GPIOB
+#define SPI_CLOCK_Pin GPIO_PIN_8
+#define SPI_CLOCK_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14

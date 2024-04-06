@@ -90,7 +90,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+  MC74HCT595A_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,29 +116,29 @@ int main(void)
 //			buzzer_freq(0);
 //		}
 //	  HAL_UART_Transmit(&huart2,Test,sizeof(Test),10);// Sending in normal mode
-	  HAL_UART_Receive (&huart2, Rx_data, 1000, 500);  // receive 4 bytes of data
-	  if(Rx_data[0] == '%'){
-		  start_read = true;
-		  Rx_data[0] = 0;
-	  }
-	  if(start_read){
-		  start_read = false;
-		  for(size_t i = 1; i <100;i++){
-			  if(Rx_data[i] == '$'){
-				  Tx_data[i-1] = '\0';
-				  //call function for parse notes and send ack to master
-				  HAL_UART_Transmit(&huart2,Tx_data,i+1,10);// Sending in normal mode
-			  }
-			  else{
-				  Tx_data[i-1] = Rx_data[i];
-			  }
-		  }
-	  }
+//	  HAL_UART_Receive (&huart2, Rx_data, 1000, 500);  // receive 4 bytes of data
+//	  if(Rx_data[0] == '%'){
+//		  start_read = true;
+//		  Rx_data[0] = 0;
+//	  }
+//	  if(start_read){
+//		  start_read = false;
+//		  for(size_t i = 1; i <100;i++){
+//			  if(Rx_data[i] == '$'){
+//				  Tx_data[i-1] = '\0';
+//				  //call function for parse notes and send ack to master
+//				  HAL_UART_Transmit(&huart2,Tx_data,i+1,10);// Sending in normal mode
+//			  }
+//			  else{
+//				  Tx_data[i-1] = Rx_data[i];
+//			  }
+//		  }
+//	  }
 //	HAL_Delay(1000);
 //	  HAL_Delay(100);
 //	  buzzer_stop();
 //	  HAL_Delay(100);
-
+	  writeToRegisters();
   }
   /* USER CODE END 3 */
 }
