@@ -11,7 +11,7 @@ uint32_t Channel = TIM_CHANNEL_2;
 
 
 void buzzer_freq(int freq) {
-	int arr = 1066000/freq;   //ARR diveder
+	int arr = 1000000/freq;   //ARR diveder
 	TIM1->CCR2 = 50;  //duty cycle
 	TIM1->ARR = arr;
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
