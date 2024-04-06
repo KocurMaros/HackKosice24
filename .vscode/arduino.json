@@ -1,0 +1,5 @@
+{
+    "configuration": "pnum=GENERIC_G0B1RETX,upload_method=swdMethod,xserial=generic,usb=none,opt=osstd,dbg=none,rtlib=nano",
+    "board": "STMicroelectronics:stm32:GenG0",
+    "port": "/dev/ttyACM0"
+}
