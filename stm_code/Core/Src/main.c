@@ -135,6 +135,9 @@ int main(void)
 		  }
 	  }
 //	HAL_Delay(1000);
+//	  play_scale();
+//	  play_rick_roll();
+
 //	  HAL_Delay(100);
 //	  buzzer_stop();
 //	  HAL_Delay(100);
