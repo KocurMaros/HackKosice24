@@ -1,42 +1,42 @@
 #include "pitches.h"
 
-Tone::Tone(){}
+MelodyDataStructure::MelodyDataStructure(){}
 
-Tone::Tone(int freq, int t, int b){
+MelodyDataStructure::MelodyDataStructure(int freq, int t, int b){
     frequency = freq;
     type = t;
     bpm = b;
 }
 
-void Tone::setFrequency(int freq){
+void MelodyDataStructure::setFrequency(int freq){
     frequency = freq;
 }
 
-void Tone::setType(int t){
+void MelodyDataStructure::setType(int t){
     type = t;
 }
 
-void Tone::setBpm(int b){
+void MelodyDataStructure::setBpm(int b){
     bpm = b;
 }
 
-int Tone::getFrequency(){
+int MelodyDataStructure::getFrequency(){
     return frequency;
 }
 
-int Tone::getType(){
+int MelodyDataStructure::getType(){
     return type;
 }
 
-int Tone::getBpm(){
+int MelodyDataStructure::getBpm(){
     return bpm;
 }
 
-QString Tone::toText() {
+QString MelodyDataStructure::toText() {
         return QString("%1,%2,%3").arg(frequency).arg(type).arg(bpm);
 }
 
-void Tone::fromText(const QString& text) {
+void MelodyDataStructure::fromText(const QString& text) {
     QStringList parts = text.split(",");
     if (parts.size() >= 3) {
         frequency = parts[0].toInt();

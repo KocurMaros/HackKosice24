@@ -64,7 +64,7 @@ private:
     std::vector<int> A = {NOTE_A1, NOTE_A2,NOTE_A3,NOTE_A4,NOTE_A5,NOTE_A6,NOTE_A7};
     std::vector<int> B = {NOTE_B1, NOTE_B2,NOTE_B3,NOTE_B4,NOTE_B5,NOTE_B6,NOTE_B7};
     std::vector<int> note_type = {4,8,16};
-    std::vector<Tone> recorded_melody;
+    std::vector<MelodyDataStructure> recorded_melody;
     int recorded_melody_bpm;
     bool is_recording = false;
     int last_bpm = 90;

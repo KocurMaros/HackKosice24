@@ -58,11 +58,11 @@
 #define NOTE_D8 4699
 #define REST 0
 
-class Tone{
+class MelodyDataStructure{
 public:
     //constructors
-    Tone();
-    Tone(int freq, int t, int b);
+    MelodyDataStructure();
+    MelodyDataStructure(int freq, int t, int b);
 
     QString toText();
     // Deserialization from text function

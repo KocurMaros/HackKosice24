@@ -19,50 +19,85 @@ void MainWindow::on_C_button_clicked()
         std::cout << "C" << ui->Octave_combobox->currentIndex()+1 << std::endl;
         std::cout << "Duration: " << note_type[ui->Duration_combobox->currentIndex()] << std::endl;
         std::cout << "BPM: " << ui->BPM_lineedit->text().toInt() << std::endl;
-        recorded_melody.push_back(Tone(C[ui->Octave_combobox->currentIndex()],note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
+        recorded_melody.push_back(MelodyDataStructure(C[ui->Octave_combobox->currentIndex()],note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
     }
 }
 
 
 void MainWindow::on_D_button_clicked()
 {
-
+    if(is_recording){
+        std::cout << "D" << ui->Octave_combobox->currentIndex()+1 << std::endl;
+        std::cout << "Duration: " << note_type[ui->Duration_combobox->currentIndex()] << std::endl;
+        std::cout << "BPM: " << ui->BPM_lineedit->text().toInt() << std::endl;
+        recorded_melody.push_back(MelodyDataStructure(D[ui->Octave_combobox->currentIndex()],note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
+    }
 }
 
 
 void MainWindow::on_E_button_clicked()
 {
-
+    if(is_recording){
+        std::cout << "E" << ui->Octave_combobox->currentIndex()+1 << std::endl;
+        std::cout << "Duration: " << note_type[ui->Duration_combobox->currentIndex()] << std::endl;
+        std::cout << "BPM: " << ui->BPM_lineedit->text().toInt() << std::endl;
+        recorded_melody.push_back(MelodyDataStructure(E[ui->Octave_combobox->currentIndex()],note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
+    }
 }
 
 
 void MainWindow::on_F_button_clicked()
 {
-
+    if(is_recording){
+        std::cout << "F" << ui->Octave_combobox->currentIndex()+1 << std::endl;
+        std::cout << "Duration: " << note_type[ui->Duration_combobox->currentIndex()] << std::endl;
+        std::cout << "BPM: " << ui->BPM_lineedit->text().toInt() << std::endl;
+        recorded_melody.push_back(MelodyDataStructure(F[ui->Octave_combobox->currentIndex()],note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
+    }
 }
 
 
 void MainWindow::on_G_button_clicked()
 {
-
+    if(is_recording){
+        std::cout << "G" << ui->Octave_combobox->currentIndex()+1 << std::endl;
+        std::cout << "Duration: " << note_type[ui->Duration_combobox->currentIndex()] << std::endl;
+        std::cout << "BPM: " << ui->BPM_lineedit->text().toInt() << std::endl;
+        recorded_melody.push_back(MelodyDataStructure(G[ui->Octave_combobox->currentIndex()],note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
+    }
 }
 
 
 void MainWindow::on_A_button_clicked()
 {
-
+    if(is_recording){
+        std::cout << "A" << ui->Octave_combobox->currentIndex()+1 << std::endl;
+        std::cout << "Duration: " << note_type[ui->Duration_combobox->currentIndex()] << std::endl;
+        std::cout << "BPM: " << ui->BPM_lineedit->text().toInt() << std::endl;
+        recorded_melody.push_back(MelodyDataStructure(A[ui->Octave_combobox->currentIndex()],note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
+    }
 }
 
 
 void MainWindow::on_B_button_clicked()
 {
-
+    if(is_recording){
+        std::cout << "B" << ui->Octave_combobox->currentIndex()+1 << std::endl;
+        std::cout << "Duration: " << note_type[ui->Duration_combobox->currentIndex()] << std::endl;
+        std::cout << "BPM: " << ui->BPM_lineedit->text().toInt() << std::endl;
+        recorded_melody.push_back(MelodyDataStructure(B[ui->Octave_combobox->currentIndex()],note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
+    }
 }
 
 
 void MainWindow::on_Pause_button_clicked()
 {
-
+    if(is_recording){
+        std::cout << "Pause" << std::endl;
+        std::cout << "Duration: " << note_type[ui->Duration_combobox->currentIndex()] << std::endl;
+        std::cout << "BPM: " << ui->BPM_lineedit->text().toInt() << std::endl;
+        recorded_melody.push_back(MelodyDataStructure(REST,note_type[ui->Duration_combobox->currentIndex()],ui->BPM_lineedit->text().toInt()));
+    }
 }
 
 
@@ -148,7 +183,7 @@ void MainWindow::on_Load_button_clicked()
             QTextStream in(&file);
             while (!in.atEnd()) {
                 QString line = in.readLine(); // Read a line from the file
-                Tone tone;
+                MelodyDataStructure tone;
                 tone.fromText(line); // Deserialize the Tone object from the text
                 recorded_melody.push_back(tone); // Store the read Tone object in the vector
             }
