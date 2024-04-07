@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -198,23 +199,6 @@ void MainWindow::on_Load_button_clicked()
 }
 
 
-void MainWindow::on_Send_button_clicked()
-{
-
-}
-
-
-void MainWindow::on_BPM_lineedit_textEdited(const QString &arg1)
-{
-
-}
-
-
-void MainWindow::on_BPM_lineedit_textChanged(const QString &arg1)
-{
-}
-
-
 void MainWindow::on_BPM_lineedit_editingFinished()
 {
     QRegExp rx("[^0-9]"); // Regular expression to match any character that is not a digit
@@ -243,5 +227,41 @@ void MainWindow::print_melody(){
     for(auto tone : recorded_melody){
         std::cout << tone.getFrequency() << " " << tone.getType() << " " << tone.getBpm() << std::endl;
     }
+}
+
+
+void MainWindow::on_Play_button_clicked()
+{
+    QString currentDir = QDir::currentPath();
+
+    // Get the directory one level under the current directory
+    QDir baseDir(currentDir);
+    baseDir.cdUp(); // Navigate one level up
+    QString pythonPath = baseDir.filePath("MyComposer/Scripts/play_melody.py");
+    QString subDir = baseDir.filePath("MyComposer/Melodies");
+    QString filePath = QFileDialog::getOpenFileName(nullptr, "Open File", subDir, "Text Files (*.txt)");
+    if (!filePath.isEmpty()) {
+        if (!QFile::exists(pythonPath)) {
+            std::cout << "Python script not found at:" << pythonPath.toStdString() << std::endl;
+        }
+        else {
+            QProcess pythonProcess;
+            pythonProcess.start("python", QStringList() << pythonPath << filePath);
+            if (!pythonProcess.waitForStarted()) {
+                std::cout << "Failed to start Python script."<< std::endl;
+                return;
+            }
+
+            // Wait for the Python process to finish and read its output
+            pythonProcess.waitForFinished();
+            std::cout << "Python script finished with exit code:" << pythonProcess.exitCode() << std::endl;
+            std::cout << "Output:" << QString::fromUtf8(pythonProcess.readAllStandardOutput()).toStdString() << std::endl;
+            std::cout << "Error:" << QString::fromUtf8(pythonProcess.readAllStandardError()).toStdString() << std::endl;
+        }
+    }
+    else{
+        std::cout << "Failed" << std::endl;
+    }
+
 }
 

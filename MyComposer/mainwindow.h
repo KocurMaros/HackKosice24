@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QTextStream>
+#include <QProcess>
 #include "pitches.h"
 #include <iostream>
 
@@ -46,13 +47,9 @@ private slots:
 
     void on_Load_button_clicked();
 
-    void on_Send_button_clicked();
-
-    void on_BPM_lineedit_textEdited(const QString &arg1);
-
-    void on_BPM_lineedit_textChanged(const QString &arg1);
-
     void on_BPM_lineedit_editingFinished();
+
+    void on_Play_button_clicked();
 
 private:
     Ui::MainWindow *ui;
