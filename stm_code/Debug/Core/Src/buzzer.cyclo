@@ -1,2 +1,9 @@
-../Core/Src/buzzer.c:13:6:buzzer_freq	1
-../Core/Src/buzzer.c:20:6:buzzer_stop	1
+../Core/Src/buzzer.c:11:6:buzzer_tone	1
+../Core/Src/buzzer.c:16:6:play_note	1
+../Core/Src/buzzer.c:28:5:calculate_duration	3
+../Core/Src/buzzer.c:42:6:play_scale	2
+../Core/Src/buzzer.c:51:6:play_rick_roll	2
+../Core/Src/buzzer.c:70:6:play_swarowski	1
+../Core/Src/buzzer.c:73:6:buzzer_freq_amp	1
+../Core/Src/buzzer.c:81:6:buzzer_freq	2
+../Core/Src/buzzer.c:89:6:buzzer_stop	1

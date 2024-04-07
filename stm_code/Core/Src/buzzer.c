@@ -9,7 +9,7 @@
 uint32_t Channel = TIM_CHANNEL_2;
 //TIM_HandleTypeDef htim1; // declare the timer handle
 void buzzer_tone(int note, int duration){
-	buzzer_freq(note);
+		(note);
 	HAL_Delay(duration);
 }
 
@@ -70,10 +70,18 @@ void play_rick_roll(){
 void play_swarowski(){
 
 }
+void buzzer_freq_amp(int freq, int amp) {
+	int arr = 1000000/freq;   //ARR diveder
+//	TIM1->CCR1 = 1000;
+	TIM1->CCR2 = arr/amp;//1150;  //duty cycle
+	TIM1->ARR = arr;
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 
+}
 void buzzer_freq(int freq) {
 	int arr = 1000000/freq;   //ARR diveder
-	TIM1->CCR2 = 50;  //duty cycle
+//	TIM1->CCR1 = 1000;
+	TIM1->CCR2 = arr/2;//1150;  //duty cycle
 	TIM1->ARR = arr;
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 

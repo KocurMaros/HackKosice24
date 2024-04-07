@@ -2,15 +2,39 @@
 #define MC74HCT595A_H
 
 #include <stdint.h>
-
+#include <stdbool.h>
+#include <stdlib.h>
+#include "gpio.h"
 // Define the pins connected to the shift register
-#define DATA_PIN 0
-#define CLOCK_PIN 1
-#define LATCH_PIN 2
 
+
+// Number of shift registers
+#define REGISTERS 2
+
+// Total number of pins
+#define PINS REGISTERS * 8
+
+typedef enum{
+    SEG_DOT = 0,
+    SEG_G,
+    SEG_F,
+    SEG_E,
+    SEG_D,
+    SEG_C,
+    SEG_B,
+    SEG_A,
+    SEG_1 = 15,
+    SEG_2 = 14,
+    SEG_3 = 13,
+    SEG_4 = 12
+}Bits_segm_t;
+typedef struct{
+    uint8_t number;
+    uint8_t segments;
+}numbers_t;
 // Function prototypes
-void MC74HCT595A_init(uint8_t dataPin, uint8_t clockPin, uint8_t latchPin);
-void MC74HCT595A_shiftIn(uint8_t data);
-void MC74HCT595A_shiftOut();
-
+void MC74HCT595A_init();
+void MC74HCT595A_shiftIn(uint16_t data);
+void MC74HCT595A_shiftOut(uint16_t data);
+void writeToRegisters(uint16_t data);
 #endif // MC74HCT595A_H

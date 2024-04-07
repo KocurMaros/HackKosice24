@@ -16,6 +16,7 @@
 
 
 void buzzer_tone(int note, int duration);
+void buzzer_freq_amp(int freq, int amp);
 void buzzer_freq(int freq);
 void buzzer_stop(void);
 void play_scale();

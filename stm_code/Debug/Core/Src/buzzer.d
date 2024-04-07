@@ -31,7 +31,7 @@ Core/Src/buzzer.o: ../Core/Src/buzzer.c ../Core/Inc/buzzer.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
- ../Core/Inc/buzzer.h
+ ../Core/Inc/buzzer.h ../Core/Inc/pitches.h
 ../Core/Inc/buzzer.h:
 ../Core/Inc/tim.h:
 ../Core/Inc/main.h:
@@ -67,3 +67,4 @@ Core/Src/buzzer.o: ../Core/Src/buzzer.c ../Core/Inc/buzzer.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
 ../Core/Inc/buzzer.h:
+../Core/Inc/pitches.h:

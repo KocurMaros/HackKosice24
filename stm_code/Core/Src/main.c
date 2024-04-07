@@ -90,50 +90,74 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+  MC74HCT595A_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t Test[] = "Hello World !!!\r\n"; //Data to send
-  uint8_t Rx_data[100] = {0};  //  creating a buffer of 10 bytes
-  uint8_t Tx_data[100] = {0};
-  	  bool start_read = false;
-//  buzzer_stop();
+//  uint8_t Test[] = "Hello World !!!\r\n"; //Data to send
+//  uint8_t Rx_data[100] = {0};  //  creating a buffer of 10 bytes
+//  uint8_t Tx_data[100] = {0};
+//  	  bool start_read = false;
+//   buzzer_stop();
+  uint8_t **binary_code = {0b01001000,0b01100101,0b01101100,0b01101100,0b01101100};
+
   while (1)
   {
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+//	  for(int i = 0; i <9999;i++){
+		  writeToRegisters(7819);
+//		  HAL_Delay(100);
+//	  }
+
+
+
+
 //	  if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1)){
-//		  buzzer_freq(1000);
-//		}
-//		else if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_4)){
-//			buzzer_freq(10000);
-//		}else if(!HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
-//			buzzer_freq(440);
-//		}else{
-//			buzzer_freq(0);
-//		}
+//	  buzzer_freq(1000);
+//	}
+//	else if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_4)){
+//		buzzer_freq(10000);
+//	}else if(!HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
+    // for(int j=0;j<5;j++){
+	//   for(int i = 0; i<8;i++){
+    //         if(binary_code[j][i] & 1){
+    //             buzzer_freq(1000);
+    //         }
+    //         else{
+    //             buzzer_freq(500);
+    //         }
+	//         HAL_Delay(1);
+    //     }
+    //     HAL_Delay(10);
+    // }
+//	}else{
+//		buzzer_freq(0);
+//	}
 //	  HAL_UART_Transmit(&huart2,Test,sizeof(Test),10);// Sending in normal mode
-	  HAL_UART_Receive (&huart2, Rx_data, 1000, 500);  // receive 4 bytes of data
-	  if(Rx_data[0] == '%'){
-		  start_read = true;
-		  Rx_data[0] = 0;
-	  }
-	  if(start_read){
-		  start_read = false;
-		  for(size_t i = 1; i <100;i++){
-			  if(Rx_data[i] == '$'){
-				  Tx_data[i-1] = '\0';
-				  //call function for parse notes and send ack to master
-				  HAL_UART_Transmit(&huart2,Tx_data,i+1,10);// Sending in normal mode
-			  }
-			  else{
-				  Tx_data[i-1] = Rx_data[i];
-			  }
-		  }
-	  }
+
+//	  HAL_UART_Receive (&huart2, Rx_data, 1000, 500);  // receive 4 bytes of data
+//	  if(Rx_data[0] == '%'){
+//		  start_read = true;
+//		  Rx_data[0] = 0;
+//	  }
+//	  if(start_read){
+//		  start_read = false;
+//		  for(size_t i = 1; i <100;i++){
+//			  if(Rx_data[i] == '$'){
+//				  Tx_data[i-1] = '\0';
+//				  //call function for parse notes and send ack to master
+//				  play_rick_roll();
+//				  HAL_UART_Transmit(&huart2,Tx_data,i+1,10);// Sending in normal mode
+//			  }
+//			  else{
+//				  Tx_data[i-1] = Rx_data[i];
+//			  }
+//		  }
+//	  }
 //	HAL_Delay(1000);
 //	  play_scale();
 //	  play_rick_roll();

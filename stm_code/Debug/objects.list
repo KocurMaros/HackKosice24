@@ -1,3 +1,4 @@
+"./Core/Src/MC74HCT595A.o"
 "./Core/Src/buzzer.o"
 "./Core/Src/gpio.o"
 "./Core/Src/main.o"

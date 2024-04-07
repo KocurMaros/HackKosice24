@@ -1,2 +1,9 @@
-../Core/Src/buzzer.c:13:6:buzzer_freq	24	static
-../Core/Src/buzzer.c:20:6:buzzer_stop	8	static
+../Core/Src/buzzer.c:11:6:buzzer_tone	16	static
+../Core/Src/buzzer.c:16:6:play_note	16	static
+../Core/Src/buzzer.c:28:5:calculate_duration	24	static
+../Core/Src/buzzer.c:42:6:play_scale	56	static
+../Core/Src/buzzer.c:51:6:play_rick_roll	264	static
+../Core/Src/buzzer.c:70:6:play_swarowski	8	static
+../Core/Src/buzzer.c:73:6:buzzer_freq_amp	24	static
+../Core/Src/buzzer.c:81:6:buzzer_freq	24	static
+../Core/Src/buzzer.c:89:6:buzzer_stop	8	static

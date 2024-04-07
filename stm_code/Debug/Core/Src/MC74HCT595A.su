@@ -1,0 +1,6 @@
+../Core/Src/MC74HCT595A.c:8:6:MC74HCT595A_init	16	static
+../Core/Src/MC74HCT595A.c:48:6:writePinToByte	32	static
+../Core/Src/MC74HCT595A.c:67:9:calc_segments	24	static
+../Core/Src/MC74HCT595A.c:72:6:MC74HCT595A_shiftOut	40	static
+../Core/Src/MC74HCT595A.c:103:6:writeToRegisters	16	static
+../Core/Src/MC74HCT595A.c:118:6:clearRegisters	16	static

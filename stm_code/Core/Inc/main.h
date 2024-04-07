@@ -72,6 +72,8 @@ void Error_Handler(void);
 #define LED_GREEN_GPIO_Port GPIOA
 #define BUTTON_3_Pin GPIO_PIN_1
 #define BUTTON_3_GPIO_Port GPIOB
+#define DataOut_Pin GPIO_PIN_9
+#define DataOut_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
