@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
+#include <QTextStream>
 #include "pitches.h"
 #include <iostream>
 
@@ -66,5 +68,6 @@ private:
     int recorded_melody_bpm;
     bool is_recording = false;
     int last_bpm = 90;
+    void print_melody();
 };
 #endif // MAINWINDOW_H

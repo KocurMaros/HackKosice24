@@ -2,6 +2,9 @@
    Public Constants
  *************************************************/
 
+#include <QString>
+#include <QStringList>
+
 #define NOTE_C1 33
 #define NOTE_D1 37
 #define NOTE_E1 41
@@ -60,6 +63,10 @@ public:
     //constructors
     Tone();
     Tone(int freq, int t, int b);
+
+    QString toText();
+    // Deserialization from text function
+    void fromText(const QString& text);
 
     //setters
     void setFrequency(int freq);

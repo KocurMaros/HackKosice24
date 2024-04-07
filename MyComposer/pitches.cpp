@@ -32,4 +32,15 @@ int Tone::getBpm(){
     return bpm;
 }
 
+QString Tone::toText() {
+        return QString("%1,%2,%3").arg(frequency).arg(type).arg(bpm);
+}
 
+void Tone::fromText(const QString& text) {
+    QStringList parts = text.split(",");
+    if (parts.size() >= 3) {
+        frequency = parts[0].toInt();
+        type = parts[1].toInt();
+        bpm = parts[2].toInt();
+    }
+}

@@ -71,9 +71,11 @@ void MainWindow::on_Record_button_clicked()
     if(!is_recording){
         is_recording = true;
         recorded_melody.clear();
+        ui->Record_button->setText("Stop recording");
     }
     else{
         is_recording = false;
+        ui->Record_button->setText("Start recording");
     }
 }
 
@@ -86,13 +88,78 @@ void MainWindow::on_Erase_button_clicked()
 
 void MainWindow::on_Save_button_clicked()
 {
+    if (recorded_melody.empty()) {
+        std::cout << "No melody to save" << std::endl;
+        return;
+    }
+    print_melody();
+    is_recording = false;
+    ui->Record_button->setText("Start recording");
 
+    QString currentDir = QDir::currentPath();
+
+    // Get the directory one level under the current directory
+    QDir baseDir(currentDir);
+    baseDir.cdUp(); // Navigate one level up
+
+    QString subDir = baseDir.filePath("MyComposer/Melodies");
+    QString filePath = QFileDialog::getSaveFileName(nullptr, "Save File", subDir, "Text Files (*.txt)");
+
+    // Check if a file was selected
+    if (!filePath.isEmpty()) {
+        // Open the selected file for writing
+        QFile file(filePath);
+
+        // Open the file in read-only mode
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            // Write some text to the file
+            //TODO: write the melody to the file
+            QTextStream out(&file);
+            for (auto tone : recorded_melody) {
+                out << tone.toText() << "\n";
+            }
+            std::cout << "Saved" << std::endl;
+            file.close();
+        } else {
+            std::cout<< "Failed" <<std::endl;
+        }
+    }
 }
 
 
 void MainWindow::on_Load_button_clicked()
 {
+    QString currentDir = QDir::currentPath();
 
+    // Get the directory one level under the current directory
+    QDir baseDir(currentDir);
+    baseDir.cdUp(); // Navigate one level up
+
+    QString subDir = baseDir.filePath("MyComposer/Melodies");
+    QString filePath = QFileDialog::getOpenFileName(nullptr, "Open File", subDir, "Text Files (*.txt)");
+
+    // Check if a file was selected
+    if (!filePath.isEmpty()) {
+        recorded_melody.clear();
+        is_recording = false;
+        ui->Record_button->setText("Start recording");
+        QFile file(filePath);
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
+            QTextStream in(&file);
+            while (!in.atEnd()) {
+                QString line = in.readLine(); // Read a line from the file
+                Tone tone;
+                tone.fromText(line); // Deserialize the Tone object from the text
+                recorded_melody.push_back(tone); // Store the read Tone object in the vector
+            }
+            std::cout << "Loaded" << std::endl;
+            file.close();
+            print_melody();
+        }
+        else{
+            std::cout << "Failed" << std::endl;
+        }
+    }
 }
 
 
@@ -134,6 +201,12 @@ void MainWindow::on_BPM_lineedit_editingFinished()
         else{
             last_bpm = ui->BPM_lineedit->text().toInt();
         }
+    }
+}
+
+void MainWindow::print_melody(){
+    for(auto tone : recorded_melody){
+        std::cout << tone.getFrequency() << " " << tone.getType() << " " << tone.getBpm() << std::endl;
     }
 }
 
