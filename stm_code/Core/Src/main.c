@@ -97,9 +97,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 
   uint8_t Rx_data[150] = {0};  //  creating a buffer of 10 bytes
-  uint8_t frequnecy_usart[20]={0};
-  uint8_t type_usart[20]={0};
-  uint8_t bpm_usart[20]={0};
+  uint16_t frequnecy_usart[20]={0};
+  uint16_t type_usart[20]={0};
+  uint16_t bpm_usart[20]={0};
     uint8_t tones = 0;
     uint8_t commas = 0;
   bool start_read = false;
@@ -156,6 +156,10 @@ int main(void)
 			for(size_t i = 1; i <100;i++){
 				if(Rx_data[i] == '%'){
 					free(temp);
+					while(1){
+						buzzer_freq(frequnecy_usart[0]);
+
+					}
 					break;
 				}
 				else if(Rx_data[i] == ','){
