@@ -9,7 +9,7 @@
 uint32_t Channel = TIM_CHANNEL_2;
 //TIM_HandleTypeDef htim1; // declare the timer handle
 void buzzer_tone(int note, int duration){
-		(note);
+	buzzer_freq(note);
 	HAL_Delay(duration);
 }
 

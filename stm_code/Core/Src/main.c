@@ -95,20 +95,25 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-//  uint8_t Test[] = "Hello World !!!\r\n"; //Data to send
-//  uint8_t Rx_data[100] = {0};  //  creating a buffer of 10 bytes
-//  uint8_t Tx_data[100] = {0};
-//  	  bool start_read = false;
-//   buzzer_stop();
+
+  uint8_t Rx_data[150] = {0};  //  creating a buffer of 10 bytes
+  uint8_t frequnecy_usart[20]={0};
+  uint8_t type_usart[20]={0};
+  uint8_t bpm_usart[20]={0};
+    uint8_t tones = 0;
+    uint8_t commas = 0;
+  bool start_read = false;
+   buzzer_stop();
     uint16_t freq = 0;
+
     bool button_pressed = false;
-  while (1)
-  {
+    bool ricko_rool = false;
+    while (1)
+    {
 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
     if(freq>=10000)
         writeToRegisters(9999);
     else
@@ -124,8 +129,16 @@ int main(void)
 		button_pressed = true;
          buzzer_freq(freq);
 	}else if(!HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
-   
-         buzzer_freq(1000);
+		if(!button_pressed){
+			if(!ricko_rool){
+				 play_scale();
+				 ricko_rool = true;
+			}else{
+				 play_rick_roll();
+				 ricko_rool = false;
+			}
+		}
+		 button_pressed = true;
 	}else{
 		buzzer_freq(0);
 	}
@@ -133,27 +146,50 @@ int main(void)
         button_pressed = false;
     }
 
-//	  HAL_UART_Transmit(&huart2,Test,sizeof(Test),10);// Sending in normal mode
+    HAL_UART_Receive (&huart2, Rx_data, 1, 10);  // receive 4 bytes of data
+    if(Rx_data[0] == '$'){
+    	HAL_UART_Receive (&huart2, Rx_data, 150, 500);
+		if(Rx_data[0] == '&'){
+			char *temp;
+			temp = malloc(3*sizeof(char));
+			int j = 0;
+			for(size_t i = 1; i <100;i++){
+				if(Rx_data[i] == '%'){
+					free(temp);
+					break;
+				}
+				else if(Rx_data[i] == ','){
+					j=0;
+					commas++;
+					switch (commas)
+					{
+					case 1:
+						frequnecy_usart[tones] = atoi(temp);
+						break;
+					case 2:
+						type_usart[tones] = atoi(temp);
+						break;
+					case 3:
+						bpm_usart[tones] = atoi(temp);
+						break;
+					default:
+						break;
+					}
+					free(temp);
+					temp = malloc(3*sizeof(char));
+				}else{
+					temp[j++] = Rx_data[i];
+				}
+				if(commas == 3){
+					commas = 0;
+					tones++;
+				}
+			}
+		}
 
-//	  HAL_UART_Receive (&huart2, Rx_data, 1000, 500);  // receive 4 bytes of data
-//	  if(Rx_data[0] == '%'){
-//		  start_read = true;
-//		  Rx_data[0] = 0;
-//	  }
-//	  if(start_read){
-//		  start_read = false;
-//		  for(size_t i = 1; i <100;i++){
-//			  if(Rx_data[i] == '$'){
-//				  Tx_data[i-1] = '\0';
-//				  //call function for parse notes and send ack to master
-//				  play_rick_roll();
-//				  HAL_UART_Transmit(&huart2,Tx_data,i+1,10);// Sending in normal mode
-//			  }
-//			  else{
-//				  Tx_data[i-1] = Rx_data[i];
-//			  }
-//		  }
-//	  }
+    }
+//    	HAL_UART_Transmit(&huart2,Rx_data,sizeof(Rx_data),10);// Sending in normal mode
+   Rx_data[0] = 0;
 //	HAL_Delay(1000);
 //	  play_scale();
 //	  play_rick_roll();
