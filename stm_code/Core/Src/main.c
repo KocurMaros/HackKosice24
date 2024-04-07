@@ -100,43 +100,39 @@ int main(void)
 //  uint8_t Tx_data[100] = {0};
 //  	  bool start_read = false;
 //   buzzer_stop();
-  uint8_t **binary_code = {0b01001000,0b01100101,0b01101100,0b01101100,0b01101100};
-
+    uint16_t freq = 0;
+    bool button_pressed = false;
   while (1)
   {
 
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//	  for(int i = 0; i <9999;i++){
-		  writeToRegisters(7819);
-//		  HAL_Delay(100);
-//	  }
 
+    if(freq>=10000)
+        writeToRegisters(9999);
+    else
+        writeToRegisters(freq);
+    if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1)){
+        if(freq<10000 && !button_pressed)
+            freq+=100;
+        button_pressed = true;
+         buzzer_freq(freq);
+	}else if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_4)){
+        if(freq>0 && !button_pressed)
+            freq-=100;
+		button_pressed = true;
+         buzzer_freq(freq);
+	}else if(!HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
+   
+         buzzer_freq(1000);
+	}else{
+		buzzer_freq(0);
+	}
+    if(HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1) && HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_4) && HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
+        button_pressed = false;
+    }
 
-
-
-//	  if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1)){
-//	  buzzer_freq(1000);
-//	}
-//	else if(!HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_4)){
-//		buzzer_freq(10000);
-//	}else if(!HAL_GPIO_ReadPin (GPIOB, GPIO_PIN_1)){
-    // for(int j=0;j<5;j++){
-	//   for(int i = 0; i<8;i++){
-    //         if(binary_code[j][i] & 1){
-    //             buzzer_freq(1000);
-    //         }
-    //         else{
-    //             buzzer_freq(500);
-    //         }
-	//         HAL_Delay(1);
-    //     }
-    //     HAL_Delay(10);
-    // }
-//	}else{
-//		buzzer_freq(0);
-//	}
 //	  HAL_UART_Transmit(&huart2,Test,sizeof(Test),10);// Sending in normal mode
 
 //	  HAL_UART_Receive (&huart2, Rx_data, 1000, 500);  // receive 4 bytes of data
