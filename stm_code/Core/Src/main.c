@@ -96,7 +96,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  uint8_t Rx_data[150] = {0};  //  creating a buffer of 10 bytes
+  uint8_t Rx_data[1024] = {0};  //  creating a buffer of 10 bytes
   uint16_t frequnecy_usart[20]={0};
   uint16_t type_usart[20]={0};
   uint16_t bpm_usart[20]={0};
@@ -148,45 +148,47 @@ int main(void)
 
     HAL_UART_Receive (&huart2, Rx_data, 1, 10);  // receive 4 bytes of data
     if(Rx_data[0] == '$'){
-    	HAL_UART_Receive (&huart2, Rx_data, 150, 500);
+    	HAL_UART_Receive (&huart2, Rx_data, 1024, 500);
 		if(Rx_data[0] == '&'){
 			char *temp;
-			temp = malloc(3*sizeof(char));
+			temp = malloc(5*sizeof(char));
 			int j = 0;
 			for(size_t i = 1; i <100;i++){
 				if(Rx_data[i] == '%'){
 					free(temp);
-					while(1){
-						buzzer_freq(frequnecy_usart[0]);
-
-					}
 					break;
 				}
 				else if(Rx_data[i] == ','){
-					j=0;
 					commas++;
 					switch (commas)
 					{
 					case 1:
+						temp[j]='\0';
 						frequnecy_usart[tones] = atoi(temp);
 						break;
 					case 2:
+						temp[j]='\0';
 						type_usart[tones] = atoi(temp);
 						break;
 					case 3:
+						temp[j]='\0';
 						bpm_usart[tones] = atoi(temp);
 						break;
 					default:
 						break;
 					}
+					j=0;
 					free(temp);
-					temp = malloc(3*sizeof(char));
+					temp = malloc(5*sizeof(char));
 				}else{
 					temp[j++] = Rx_data[i];
 				}
 				if(commas == 3){
 					commas = 0;
+					play_swarowski(frequnecy_usart[tones], type_usart[tones], bpm_usart[tones]);
 					tones++;
+					if(tones >= 20)
+						tones = 0;
 				}
 			}
 		}

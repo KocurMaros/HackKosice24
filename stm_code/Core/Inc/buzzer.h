@@ -23,5 +23,6 @@ void play_scale();
 int calculate_duration(int bpm, int note_type);
 void play_note(int note, int duration);
 void play_rick_roll();
+void play_swarowski(uint16_t frequency, uint16_t type, uint16_t bpm);
 
 #endif /* INC_BUZZER_H_ */

@@ -45,7 +45,6 @@ void play_scale(){
 	for (int i=0;i<8;i++){
 		play_note(scale[i],calculate_duration(90, whole_note));
 	}
-	HAL_Delay(1000);
 }
 
 void play_rick_roll(){
@@ -64,12 +63,12 @@ void play_rick_roll(){
 		play_note(melody[this_note], calculate_duration(bpm,melody[this_note+1]));
 	}
 
-	HAL_Delay(3000);
 }
 
-void play_swarowski(){
-
+void play_swarowski(uint16_t frequency, uint16_t type, uint16_t bpm){
+	play_note(frequency, calculate_duration(bpm, type));
 }
+
 void buzzer_freq_amp(int freq, int amp) {
 	int arr = 1000000/freq;   //ARR diveder
 //	TIM1->CCR1 = 1000;

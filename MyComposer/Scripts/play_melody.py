@@ -9,7 +9,7 @@ def parse_file_contents(file_path):
             for line in lines[:20]:  # Read a maximum of 20 lines
                 numbers = line.strip().split(',')
                 parsed_numbers.append(','.join(numbers) + ',')
-            return '$&' + ''.join(parsed_numbers)[:-1] + '%'
+            return '$&' + ''.join(parsed_numbers)[:-1] + ',%'
     except FileNotFoundError:
         print(f"File '{file_path}' not found.")
         return None
