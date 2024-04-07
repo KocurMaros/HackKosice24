@@ -51,6 +51,8 @@ private slots:
 
     void on_Play_button_clicked();
 
+    void on_Port_lineedit_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     std::vector<int> C = {NOTE_C1, NOTE_C2,NOTE_C3,NOTE_C4,NOTE_C5,NOTE_C6,NOTE_C7};
@@ -66,5 +68,6 @@ private:
     bool is_recording = false;
     int last_bpm = 90;
     void print_melody();
+    std::string port;
 };
 #endif // MAINWINDOW_H

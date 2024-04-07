@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //TODO: osetrit ci to neni blbost
+    port = ui->Port_lineedit->text().toStdString();
 }
 
 MainWindow::~MainWindow()
@@ -246,7 +248,7 @@ void MainWindow::on_Play_button_clicked()
         }
         else {
             QProcess pythonProcess;
-            pythonProcess.start("python", QStringList() << pythonPath << filePath);
+            pythonProcess.start("python", QStringList() << pythonPath << filePath << QString::fromStdString(port));
             if (!pythonProcess.waitForStarted()) {
                 std::cout << "Failed to start Python script."<< std::endl;
                 return;
@@ -263,5 +265,11 @@ void MainWindow::on_Play_button_clicked()
         std::cout << "Failed" << std::endl;
     }
 
+}
+
+
+void MainWindow::on_Port_lineedit_editingFinished()
+{
+    port = ui->Port_lineedit->text().toStdString();
 }
 
