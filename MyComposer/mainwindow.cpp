@@ -80,7 +80,7 @@ void MainWindow::on_Record_button_clicked()
 
 void MainWindow::on_Erase_button_clicked()
 {
-
+    recorded_melody.clear();
 }
 
 
@@ -99,5 +99,41 @@ void MainWindow::on_Load_button_clicked()
 void MainWindow::on_Send_button_clicked()
 {
 
+}
+
+
+void MainWindow::on_BPM_lineedit_textEdited(const QString &arg1)
+{
+
+}
+
+
+void MainWindow::on_BPM_lineedit_textChanged(const QString &arg1)
+{
+}
+
+
+void MainWindow::on_BPM_lineedit_editingFinished()
+{
+    QRegExp rx("[^0-9]"); // Regular expression to match any character that is not a digit
+    if (ui->BPM_lineedit->text().contains(rx)) {
+        //set the text to the last bpm
+        ui->BPM_lineedit->setText(QString::number(last_bpm));
+    }
+    else{
+        //check if it isnt lower than 1
+
+        if(ui->BPM_lineedit->text().toInt() < 1){
+            ui->BPM_lineedit->setText(QString::number(1));
+            last_bpm = 1;
+        }
+        else if(ui->BPM_lineedit->text().toInt() > 300){
+            ui->BPM_lineedit->setText(QString::number(300));
+            last_bpm = 300;
+        }
+        else{
+            last_bpm = ui->BPM_lineedit->text().toInt();
+        }
+    }
 }
 

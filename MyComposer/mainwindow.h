@@ -46,6 +46,12 @@ private slots:
 
     void on_Send_button_clicked();
 
+    void on_BPM_lineedit_textEdited(const QString &arg1);
+
+    void on_BPM_lineedit_textChanged(const QString &arg1);
+
+    void on_BPM_lineedit_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     std::vector<int> C = {NOTE_C1, NOTE_C2,NOTE_C3,NOTE_C4,NOTE_C5,NOTE_C6,NOTE_C7};
@@ -59,5 +65,6 @@ private:
     std::vector<Tone> recorded_melody;
     int recorded_melody_bpm;
     bool is_recording = false;
+    int last_bpm = 90;
 };
 #endif // MAINWINDOW_H
