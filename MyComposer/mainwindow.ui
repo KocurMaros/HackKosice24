@@ -314,7 +314,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>COM9</string>
+         <string>COM10</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
